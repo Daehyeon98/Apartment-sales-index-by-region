@@ -1,0 +1,101 @@
+# Python 언어 버전
+# 패키지 로드 및 엑셀 파일 로드
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+# 메인 데이터 불러오기
+plt.rcParams["font.family"] = "NanumGothic"
+apartment = pd.read_csv('C:/Study/Data/아파트매매가격지수_시도_시_군_구__(단위억원).csv', encoding='euc-kr') 
+apartment
+
+# 2020년 3월, 9월 지표
+apt2020 = apartment.iloc[:17, :3] # slicing, 2020년 3월, 9월 항목 분리
+apt2020
+
+# 2021년 3월, 9월 지표
+apt2021 = apartment.loc[:17, ['지역', '2021.03', '2021.09']] # slicing, 2021년 3월, 9월 항목 분리
+apt2021
+
+# 2022년 3월, 9월 지표
+apt2022 = apartment.loc[:17, ['지역', '2022.03', '2022.09']] # slicing, 2022년 3월, 9월 항목 분리
+apt2022
+
+apartment.shape
+
+N = apartment.shape[0]
+N
+
+index = np.arange(N)
+index
+
+# 2020년도 막대 그래프
+plt.figure(figsize=(50,13))
+w = 0.25
+apt2020_1 = plt.bar(index - w, apt2020['2020.03'], width=w, label='2020.03', color='r', alpha=0.3)
+apt2020_2 = plt.bar(index + w, apt2020['2020.09'], width=w, label='2020.09', color='g', alpha=0.3)
+
+plt.xticks(index, apt2020['지역'])
+plt.legend(fontsize=25)
+
+
+for rect in apt2020_1: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+for rect in apt2020_2: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+plt.ylim(0, 150) # y축 범위
+plt.title('지역별 아파트 매매 지수(2020년 3월, 9월)', fontsize=30, pad=30) # title
+plt.xlabel('지역',fontsize=30, labelpad=20) # x축 제목
+plt.ylabel('단위 : 억 원', fontsize=30, labelpad=20) # y축 제목
+plt.xticks(fontsize=15) # x축 레이블 글씨 사이즈
+
+# 2021년도 막대 그래프
+plt.figure(figsize=(50,13))
+w = 0.25
+apt2021_1 = plt.bar(index - w, apt2021['2021.03'], width=w, label='2021.03', color='r', alpha=0.3)
+apt2021_2 = plt.bar(index + w, apt2021['2021.09'], width=w, label='2021.09', color='g', alpha=0.3)
+
+plt.xticks(index, apt2021['지역'])
+plt.legend(fontsize=25)
+
+
+for rect in apt2021_1: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+for rect in apt2021_2: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+plt.ylim(0, 150) # y축 범위
+plt.title('지역별 아파트 매매 지수(2021년 3월, 9월)', fontsize=30, pad=30) # title
+plt.xlabel('지역',fontsize=30, labelpad=20) # x축 제목
+plt.ylabel('단위 : 억 원', fontsize=30, labelpad=20) # y축 제목
+plt.xticks(fontsize=15) # x축 레이블 글씨 사이즈
+
+# 2022년도 막대 그래프
+plt.figure(figsize=(50,13))
+w = 0.25
+apt2022_1 = plt.bar(index - w, apt2022['2022.03'], width=w, label='2022.03', color='r', alpha=0.3)
+apt2022_2 = plt.bar(index + w, apt2022['2022.09'], width=w, label='2022.09', color='g', alpha=0.3)
+
+plt.xticks(index, apt2022['지역'])
+plt.legend(fontsize=25)
+
+
+for rect in apt2022_1: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+for rect in apt2022_2: # 데이터레이블
+    height = rect.get_height()
+    plt.text(rect.get_x() + rect.get_width()/2.0, height, '%.2f' % height, ha='center',va='bottom', size = 20)
+
+plt.ylim(0, 150) # y축 범위
+plt.title('지역별 아파트 매매 지수(2022년 3월, 9월)', fontsize=30, pad=30) # title
+plt.xlabel('지역',fontsize=30, labelpad=20) # x축 제목
+plt.ylabel('단위 : 억 원', fontsize=30, labelpad=20) # y축 제목
+plt.xticks(fontsize=15) # x축 레이블 글씨 사이즈
